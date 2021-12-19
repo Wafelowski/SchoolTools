@@ -1,3 +1,10 @@
-/chrome-data
-/Fizyka.pdf
-/images
+*/dist/*
+
+#WsipDownloader
+/WsipDownloader/chrome-data
+/WsipDownloader/Fizyka.pdf
+/WsipDownloader/images
+
+#ResChanger
+/ResChanger/original
+/ResChanger/modified
