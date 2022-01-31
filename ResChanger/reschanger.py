@@ -16,7 +16,7 @@ temp = input("Czy lista plików się zgadza? (t/n): ")
 if temp.lower() != "t":
     print("\nPamietaj ze program wyszukuje pliki w folderze original, ktory znajduje sie w tym samym folderze co plik wykonywalny!")
     print("Anuluje...")
-    time.sleep(10)
+    time.sleep(5)
     exit()
 
 size = input("Podaj wybrana dlugosc dluzszej strony: ")
