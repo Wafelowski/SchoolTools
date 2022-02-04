@@ -12,7 +12,9 @@ formal_name = "BinaryConverter"
 description = "Projekcik"
 icon = "src/binaryconverter/resources/binaryconverter"
 sources = ['src/binaryconverter']
-requires = []
+requires = [
+    "tabulate",
+]
 
 
 [tool.briefcase.app.binaryconverter.macOS]
