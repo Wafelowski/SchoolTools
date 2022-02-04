@@ -1,0 +1,49 @@
+[tool.briefcase]
+project_name = "BinaryConverter"
+bundle = "pl.wafelowski"
+version = "1.0"
+url = "https://github.com/HeavyWolfPL/SchoolTools"
+license = "MIT license"
+author = 'Wafelowski'
+author_email = "admin@wafelowski.pl"
+
+[tool.briefcase.app.binaryconverter]
+formal_name = "BinaryConverter"
+description = "Projekcik"
+icon = "src/binaryconverter/resources/binaryconverter"
+sources = ['src/binaryconverter']
+requires = []
+
+
+[tool.briefcase.app.binaryconverter.macOS]
+requires = [
+    'toga-cocoa>=0.3.0.dev20',
+]
+
+[tool.briefcase.app.binaryconverter.linux]
+requires = [
+    'toga-gtk>=0.3.0.dev20',
+]
+system_requires = [
+    'libgirepository1.0-dev',
+    'libcairo2-dev',
+    'libpango1.0-dev',
+    'libwebkitgtk-3.0-0',
+    'gir1.2-webkit-3.0',
+]
+
+[tool.briefcase.app.binaryconverter.windows]
+requires = [
+    'toga-winforms>=0.3.0.dev20',
+]
+
+# Mobile deployments
+[tool.briefcase.app.binaryconverter.iOS]
+requires = [
+    'toga-iOS>=0.3.0.dev20',
+]
+
+[tool.briefcase.app.binaryconverter.android]
+requires = [
+    'toga-android>=0.3.0.dev20',
+]
