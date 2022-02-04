@@ -50,6 +50,7 @@ class BinaryConverter(toga.App):
         number_box.add(number_label)
         number_box.add(self.number_input)
 
+        self.used = False
         convert_button = toga.Button(
             'Przekonwertuj!',
             on_press=self.convert_button_func,
@@ -68,6 +69,8 @@ class BinaryConverter(toga.App):
         number = self.number_input.value
         mode = self.mode_selection.value
         number_type = self.number_type_selection.value
+        if self.used == True:
+            self.main_box.remove(self.main_box.children[4])
         if number == "":
             self.main_window.info_dialog(
                 'Błąd!',
@@ -87,9 +90,9 @@ class BinaryConverter(toga.App):
             string,
             style=Pack(font_weight="bold", font_size=10)
         )
-        result_box.remove(result_label)
         result_box.add(result_label)
         self.main_box.add(result_box)
+        self.used = True
 
     def help_button_func(self, widget):
         number = self.number_input.value
