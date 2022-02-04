@@ -1,9 +1,6 @@
 """
 Projekcik
 """
-from tkinter import CENTER
-from tkinter.font import BOLD
-from turtle import width
 import toga
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
