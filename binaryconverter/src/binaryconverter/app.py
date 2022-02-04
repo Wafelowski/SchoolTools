@@ -33,7 +33,6 @@ class BinaryConverter(toga.App):
         if len(self.main_box.children) > 1:
             self.main_box.remove(self.main_box.children[1])
         if number == "":
-            print("Textbox empty")
             return
         number = str(number).replace(" ", "")
         number = number.replace(" ", "") # Invisible character, used by Windows calculator
