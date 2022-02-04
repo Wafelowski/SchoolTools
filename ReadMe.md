@@ -10,4 +10,4 @@ Downloads an entire textbook from [wsipnet.pl](https://www.wsipnet.pl) as images
 ## BinaryConverter
 Converts a binary/octal/decimal/hexadecimal number to a binary/octal/decimal/hexadecimal number. You can also check the type of the number.
 <br>This project is a Windows application that needs to be installed, portable version not coming :(
-<br>You can find the release [here](). Made using BeeWare.
+<br>You can find the release [here](https://github.com/HeavyWolfPL/SchoolTools/releases/tag/BinaryConverter). Made using [BeeWare](https://beeware.org).
