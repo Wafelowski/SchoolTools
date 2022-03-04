@@ -28,8 +28,9 @@ if int(size) < 1:
     print("Podana liczba jest mniejsza od 1!")
     exit()
 
+
 for x in original:
-    if (x.endswith(".jpeg") or x.endswith(".jpg") or x.endswith(".png")):
+    if (x.lower().endswith(".jpeg") or x.lower().endswith(".jpg") or x.lower().endswith(".png")):
         print(f"Obraz - {x}")
         img = Image.open(f"{original_path}/{x}")
         width, height = img.size
