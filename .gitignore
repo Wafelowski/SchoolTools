@@ -3,6 +3,7 @@
 ##########
 */dist/*
 /.venv/
+/.vs/
 
 ##################
 # WsipDownloader #
@@ -17,6 +18,12 @@
 ##############
 /ResChanger/original
 /ResChanger/modified
+
+################
+# SlownikGrowy #
+################
+
+/SlownikGrowy/*.txt
 
 ###################
 # BinaryConverter #
