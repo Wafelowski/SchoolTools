@@ -50,6 +50,7 @@ function Liczba() {
     else { //To jest tutaj w przypadku gdybyśmy podali jakąś stringa lub kompletnie dziwną liczbę, np. -1.
         document.getElementById("wynik2").innerHTML = `Liczba ${liczba.value} nie jest liczbą pierwszą`;
     }
+    document.getElementById("Drukuj").hidden=false;
     return
 }
 
