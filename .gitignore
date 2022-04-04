@@ -18,6 +18,11 @@
 /ResChanger/original
 /ResChanger/modified
 
+#################
+# FileNameTools #
+#################
+/FileNameTools/results
+
 ###################
 # BinaryConverter #
 ###################
