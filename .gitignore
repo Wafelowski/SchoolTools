@@ -3,6 +3,7 @@
 ##########
 */dist/*
 /.venv/
+/.vs/
 
 ##################
 # WsipDownloader #
@@ -22,6 +23,11 @@
 # FileNameTools #
 #################
 /FileNameTools/results
+
+################
+# SlownikGrowy #
+################
+/SlownikGrowy/*.txt
 
 ###################
 # BinaryConverter #
