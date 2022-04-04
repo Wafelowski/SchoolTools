@@ -6,6 +6,9 @@
 // "const" to stała - jej się nie da zmienić
 // "let" to zmienna - ją już możemy zmieniać
 
+// Dlaczego nie używać "var" ?
+// Bo zboczeńce z javascripta tak lubią
+
 
 function DuzeLitery() {
     let imie = document.getElementById("Imie");
