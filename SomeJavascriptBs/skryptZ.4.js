@@ -79,7 +79,7 @@ function Dane() {
         return
     }
 
-    pierwszLiczba = pesel.charAt(0); //Pobieramy pierwszą liczbę z peselu.
+    peselStr = pesel; //Pobieramy pesel w postaci stringa
     pesel = Number(pesel) //Na liczbę zamieniamy dopiero po sprawdzeniu długości, dlaczego? Ponieważ string to tablica znaków, a funkcja length() zwraca długość tablicy. Liczby nie są domyślnie tablicą
     if (!Number.isInteger(pesel)) { //Sprawdzamy czy pesel składa się tylko z liczb całkowitych. ! na początku oznacza odwrócenie wyniku (True -> False i vice versa)
         document.getElementById("wynik3").innerHTML = "Pesel musi być liczbą całkowitą!";
@@ -92,8 +92,14 @@ function Dane() {
     //map(Number) zmieni nam poprzednio stworzone stringi na liczby
     //Dlaczego wpierw string i później spowrotem na liczbę? Bo tak działa JS, chyba.
 
-    if (pierwszLiczba == "0") { //map(Number) i Number() usuną nam zero z początku peselu, czego nie chcemy gdy ktoś urodził się w latach 00 - 09.
+    if (peselStr[0] == "0") { //map(Number) i Number() usuną nam zero z początku peselu, czego nie chcemy gdy ktoś urodził się w latach 00 - 09.
         pesel.unshift(0);
+        if (peselStr[1] == "0") {
+            if (peselStr[2] == "0") {
+                pesel.unshift(0);
+            }
+            pesel.unshift(0);
+        }
     }
 
     if ((pesel[4] > 3) || (pesel[3] == 2 && [0, 2, 4, 6, 8].includes(pesel[2]) && pesel[4] > 2)) { //Sprawdzamy czy dziesiątka dnia jest większa od 3 oraz czy w lutym nie ma 30'stego dnia.
