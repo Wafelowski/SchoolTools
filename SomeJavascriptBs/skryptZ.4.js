@@ -27,6 +27,8 @@ function Przywitanie() {
 
 function Liczba() {
     let liczba = document.getElementById("Liczba");
+    document.getElementById("wynik2").innerHTML = ""; //Wyczyśćmy poprzedni wynik.
+
     if ((liczba == null) || (!liczba.value) || (liczba.value == null) || (liczba.value == "")) { //Sprawdzamy czy pole nie jest puste i czy istnieje (pole może nie istnieć bo nic w nim nie ma).
         document.getElementById("wynik2").innerHTML = "Wprowadź liczbę";
         return
@@ -50,7 +52,7 @@ function Liczba() {
             document.getElementById("wynik2").innerHTML = `Liczba ${liczba.value} nie jest liczbą pierwszą`;
         }
     }
-    else { //To jest tutaj w przypadku gdybyśmy podali jakąś stringa lub kompletnie dziwną liczbę, np. -1.
+    else { //To jest tutaj w przypadku gdybyśmy podali jakiegoś stringa lub kompletnie dziwną liczbę, np. -1.
         document.getElementById("wynik2").innerHTML = `Liczba ${liczba.value} nie jest liczbą pierwszą`;
     }
     document.getElementById("Drukuj").hidden=false;
@@ -61,17 +63,43 @@ function Dane() {
     const imie = document.getElementById("Imie2").value;
     const nazwisko = document.getElementById("Nazwisko2").value;
     let pesel = document.getElementById("Pesel").value;
+    document.getElementById("wynik3").innerHTML = ""; //Wyczyśćmy poprzedni wynik.
+
+    if (imie == null || imie == "") { 
+        document.getElementById("wynik3").innerHTML = "Wprowadź imię";
+        return
+    }
+    if (nazwisko == null || nazwisko == "") { 
+        document.getElementById("wynik3").innerHTML = "Wprowadź nazwisko";
+        return
+    }
 
     if (pesel.length != 11) { //Logiczne, nie?
         document.getElementById("wynik3").innerHTML = "Pesel musi mieć 11 cyfr!";
         return
     }
-    
+
+    pierwszLiczba = pesel.charAt(0); //Pobieramy pierwszą liczbę z peselu.
+    pesel = Number(pesel) //Na liczbę zamieniamy dopiero po sprawdzeniu długości, dlaczego? Ponieważ string to tablica znaków, a funkcja length() zwraca długość tablicy. Liczby nie są domyślnie tablicą
+    if (!Number.isInteger(pesel)) { //Sprawdzamy czy pesel składa się tylko z liczb całkowitych. ! na początku oznacza odwrócenie wyniku (True -> False i vice versa)
+        document.getElementById("wynik3").innerHTML = "Pesel musi być liczbą całkowitą!";
+        return
+    }
+
     pesel = Array.from(pesel.toString()).map(Number); //Tutaj dzielimy pesel po jednej cyfrze do listy.
     //Array.from pozwoli nam na stworzenie liczby z danej wartości
     //toString() pozwala na stworzenie stringa z liczby
     //map(Number) zmieni nam poprzednio stworzone stringi na liczby
     //Dlaczego wpierw string i później spowrotem na liczbę? Bo tak działa JS, chyba.
+
+    if (pierwszLiczba == "0") { //map(Number) i Number() usuną nam zero z początku peselu, czego nie chcemy gdy ktoś urodził się w latach 00 - 09.
+        pesel.unshift(0);
+    }
+
+    if ((pesel[4] > 3) || (pesel[3] == 2 && [0, 2, 4, 6, 8].includes(pesel[2]) && pesel[4] > 2)) { //Sprawdzamy czy dziesiątka dnia jest większa od 3 oraz czy w lutym nie ma 30'stego dnia.
+        document.getElementById("wynik3").innerHTML = "Pesel jest nieprawidłowy!";
+        return
+    }
 
     switch (pesel[2]) { //Ten switch nam określa zarówno miesiąc i rok na bazie trzeciej liczby w peselu. Tak jak jest to w tym wytłumaczeniu które ci wysłałem
         case 0: //Warto zapamiętać ze ten array jest od 0 do 10, a nie od 1 do 11. Dlatego 3 pozycja w peselu, ma pozycję 2 w arrayu
@@ -119,7 +147,7 @@ function Dane() {
             break;
     }
 
-    const dzien = `${pesel[4]}${pesel[5]}`; //na 100% jest inny sposób by połączyć te dwa obiekty bez ich dodawania do siebie ale js to ustrojstwo
+    const dzien = `${pesel[4]}${pesel[5]}`; //na 100% jest inny sposób by połączyć te dwa obiekty bez ich dodawania (matematycznie) do siebie ale js to ustrojstwo
     const data = new Date(rok,miesiac,dzien); //układamy sobie tutaj datę w kolejności rok-miesiąc-dzień
     const dzisiejszaData = new Date(); //new Date() bez parametrów zwróci nam aktualną datę i godzinę, alias do Date.now()
     const Roznica = Math.floor(((dzisiejszaData - data) / (1000 * 60 * 60 * 24)) / 365); // Robimy różnice dwóch dwat po czym przekształcamy w kolejności (ms -> s -> min -> h -> d -> y)
@@ -128,9 +156,23 @@ function Dane() {
 }
 
 function Data() {
+    document.getElementById("wynik4").innerHTML = ""; //Wyczyśćmy poprzedni wynik.
     const dzisiejszaData = new Date();
     let przyszlaData = document.getElementById("przyszlaData").value;
     przyszlaData = przyszlaData.replace(",", ".").replace("-", ".").replace("/", ".").replace(" ", ".").split("."); //W razie wpisania daty z myślnikami/przecinkami/slashami zamienimy je na kropki. Po czym datę dzielimy na części, kropka jest wyznacznikiem przerwy.
+
+    alert(przyszlaData[0] + " " + przyszlaData[1]);
+    if (przyszlaData[0] > 31 || przyszlaData[1] > 12) { //Sprawdzamy czy data jest prawidłowa
+        document.getElementById("wynik4").innerHTML = "Data jest nieprawidłowa!";
+        return
+    }
+
+    if ((["02", "04", "06", "09", "11"].includes(przyszlaData[1]) && przyszlaData[0] > 30) || (przyszlaData[1] == "02" && przyszlaData[0] > 29)) { // Sprawdzamy czy miesiąc ma miesiąc ma tyle dni ile podano w dacie.
+        document.getElementById("wynik4").innerHTML = "Data jest nieprawidłowa!";
+        return
+    }
+
+
     przyszlaData = new Date(`${przyszlaData[2]}.${przyszlaData[1]}.${przyszlaData[0]} ${dzisiejszaData.getHours()}:${dzisiejszaData.getMinutes()}:${dzisiejszaData.getSeconds()}`);
     //Tworzymy datę w kolejności roku, miesiąca i dnia, po spacji dodajemy godzinę, minuty i sekundy.
     const Roznica = przyszlaData - dzisiejszaData; //Obliczamy różnicę znowu
