@@ -1,0 +1,50 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="HaslaSkrypt.js"></script>
+<title>Weryfikacja jakości hasła</title>
+</head>
+
+<!-- 
+
+    Skrypt powinien zostać napisany w języku uruchamianym po stronie przeglądarki.
+    Skrypt jest uruchamiany po naciśnięciu przycisku "Weryfikuj".
+    
+    Działanie skryptu:
+    1) pobiera hasło z pola tekstowego,
+    2) sprawdza warunki jakości hasła (zapisane w tabeli)
+    3) wpisuje w prawym panelu pod polem tekstowym treść:
+        - "HASŁO JEST PUSTE" czcionką w kolorze czerwonym, jeśli pole jest puste
+        - "HASŁO JEST SŁABE" czcionką w kolorze żółtym, jeśli hasło spełnia warunki słabego
+        - "HASŁO JEST ŚREDNIE" czcionką w kolorze niebieskim, jeśli hasło spełnia warunki średniego
+        - "HASŁO JEST DOBRE" czcionką koloru zielonego, jeśli hasło spełnia warunki hasła dobrego
+
+    Zasady haseł:
+    ╔══════════════╦══════════════════════════════════════╗
+    ║ Jakość hasła ║                 Opis                 ║
+    ╠══════════════╬══════════════════════════════════════╣
+    ║ dobre        ║ 7+ znaków, przynajmniej jedna cyfra  ║
+    ║ średnie      ║ 4-6 znaków, przynajmniej jedna cyfra ║
+    ║ słabe        ║ gorsze przypadki                     ║
+    ╚══════════════╩══════════════════════════════════════╝
+    yikes
+
+-->
+
+<body>
+<center><h1>Weryfikacja jakości hasła</h1></center>
+<center>
+Wpisz hasło: <input type="text" id="haslo" placeholder="Wpisz hasło..."> <br/>
+<button onclick="SprawdzHaslo()">Zweryfikuj</button> <br/><br/>
+<div id="komunikat"></div>
+
+<button onclick="SprawdzHasloRegex1()">Zweryfikuj Regex2</button> <br/><br/>
+<div id="komunikat1"></div>
+
+<button onclick="SprawdzHasloRegex2()">Zweryfikuj Regex2</button> <br/><br/>
+<div id="komunikat2"></div>
+
+</center>
+</body>
+</html>
