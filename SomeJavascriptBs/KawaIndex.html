@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <style>
+    .center {
+      margin: auto;
+      width: 80%;
+    }
+    div {
+      margin-top:10px;
+    }
+    input {
+      margin-top:10px;
+    }
+  </style>
+
+  <!-- 
+    Błędy:
+    1. Polskie znaki w nazwach funkcji czy ID elementów.
+    2. <br><br><br>, kary godne. CSS jest ładniejszy i nie robi burdelu w kodzie.
+       <br> można użyć w tekście, by zrobić akapit, nie by oddzielać elementy od siebie.
+    3. "Nestowanie" kodu, aka tabulacja, a raczej jej brak.
+    4. Użyj switcha jeśli sprawdzasz tylko wartość jednej zmiennej.
+  -->
+
+  <div id="main">
+    <div id="head"> <!-- Zbędne -->
+    </div>
+
+    <center>
+      <div id="menu"> <!-- Zbędne -->
+      </div>
+
+      <div id="centrum"> </br> </br>
+        1) Palona Arabica - 5 zł </br>
+        2) Palona Robusta - 6 zł </br>
+        3) Bezkofeinowa - 7 zł 
+        <form id="zamowienie" action="javascript:zamowienie()" method="post"> </br>
+          Podaj numer kawy <input type="kawa" id="kawa" name="kawa"></input>
+          </br>
+          Podaj wage w dag. <input type="waga"  id="waga" name="waga"></input>
+          </br>
+          
+          <input type="submit" id="zamowienie" value="Zamów">   
+        </form>
+        <script>
+          function zamowienie() {
+            var kawa = document.getElementById('kawa').value;
+            var waga = document.getElementById('waga').value;
+
+            if (kawa.length == 0 || waga.length == 0) {
+              document.getElementById("cena").innerHTML = `Nie wypełniono formularza.`;
+              return;
+            }
+
+            var cena;
+            kawa=parseFloat(kawa)
+            waga=parseFloat(waga)
+            cena=parseFloat(cena)
+
+            if (Number.isNaN(waga)) { // Jeśli ktoś nie poda wagi, nie oznacza to że jest równa 0.
+              document.getElementById("cena").innerHTML = `Podaj prawidłową wagę.`;
+              return;
+            }
+
+            if (waga != 0 && kawa != 0) {
+              switch(kawa) {
+                case 1:
+                  cena = waga*5;
+                  break;
+                case 2:
+                  cena = waga*6;
+                  break;
+                case 3:
+                  cena = waga*7;
+                  break;
+                default:
+                  document.getElementById("cena").innerHTML = `Nie ma takiej kawy`;
+                  return;
+              }
+              
+              document.getElementById("cena").innerHTML = `Koszt zamówienia wynosi ${cena} zł`;
+            }
+            else {
+              document.getElementById("cena").innerHTML = `Podaj dodatnie liczby.`;
+              return;
+            }
+          }            
+        </script>
+        
+        <p id="cena"></p>
+      </div>
+
+      <div id="foot"> <!-- Zbędne -->
+      </div>
+
+    </center>         
+  </div>
+
+</body>        
+</html>
