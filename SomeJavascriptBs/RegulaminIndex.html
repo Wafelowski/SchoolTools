@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="RegulaminSkrypt.js"></script>
+<title>Akceptacja Regulaminu</title>
+</head>
+
+<body>
+    <style>
+        .center {
+            margin: auto;
+            width: 80%;
+        }
+        div {
+            margin-top: 10px;
+        }
+        input {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        label textarea {
+            vertical-align: middle;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+      </style>
+<center>
+<div id="main">
+
+    Imie: <input type="text" id="imie"> <br/>
+    Nazwisko: <input type="text" id="nazwisko"> <br/>
+    Email: <input type="text" id="email"> <br/>
+    <label for="textarea">Usługa: <textarea id="usluga" cols="25" rows="3"></textarea></label><br/>
+    
+    <input type="checkbox" id="regulamin">
+    <label for="regulamin"> Zapoznałam/em się z regulaminem</label><br>
+
+    <button onclick="Resetuj()">Resetuj</button>
+    <button onclick="Przeslij()">Prześlij</button><br/>
+
+    <div id="odpowiedz"></div>
+</div>
+
+</center>
+</body>
+</html>
