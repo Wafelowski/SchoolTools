@@ -5,13 +5,10 @@
 /.venv/
 /.vs/
 
-##################
-# WsipDownloader #
-##################
-
-/WsipDownloader/chrome-data
-/WsipDownloader/Fizyka.pdf
-/WsipDownloader/images
+#################
+# FileNameTools #
+#################
+/FileNameTools/results
 
 ##############
 # ResChanger #
@@ -19,15 +16,23 @@
 /ResChanger/original
 /ResChanger/modified
 
-#################
-# FileNameTools #
-#################
-/FileNameTools/results
-
 ################
 # SlownikGrowy #
 ################
 /SlownikGrowy/*.txt
+
+##############
+# VPNChecker #
+##############
+/VPNChecker/ip_addresses.txt
+
+##################
+# WsipDownloader #
+##################
+
+/WsipDownloader/chrome-data
+/WsipDownloader/Fizyka.pdf
+/WsipDownloader/images
 
 ###################
 # BinaryConverter #
