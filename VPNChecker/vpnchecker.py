@@ -36,9 +36,9 @@ def vpn_check(api_key, addresses):
             api = api.json()
             print(api)
 
-            if api['message'] == 'You have exceeded the maximum daily limit for this API key. Please upgrade your plan.':
+            if "message" in api == 'You have exceeded the maximum daily limit for this API key. Please upgrade your plan.':
                 print("\nYou have exceeded the maximum daily limit for this API key!")
-                return
+                break
             
             if api['security']['vpn'] == True:
                 vpns.append(ip)
