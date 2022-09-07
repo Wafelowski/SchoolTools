@@ -21,6 +21,8 @@ if str(pause) == "1":
 
     driver = webdriver.Chrome(service=s, options=chrome_options)
 
+    driver.split()
+
     #driver.get("https://app.wsipnet.pl/e-podreczniki/podglad/534/index.html")
     driver.get("https://www.wsipnet.pl")
     time.sleep(5)
