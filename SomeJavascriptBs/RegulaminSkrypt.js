@@ -37,6 +37,6 @@ function Przeslij() {
         return;
     }
 
-    odpowiedz.style.color = "white";
+    odpowiedz.style.color = "black";
     odpowiedz.innerHTML = `${imie.toUpperCase()} ${nazwisko.toUpperCase()} <br/>Treść twojej sprawy: ${usluga} <br/>Na podany adres e-mail zostanie wysłana oferta.`;
 }
