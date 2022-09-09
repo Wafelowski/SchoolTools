@@ -1,0 +1,21 @@
+{
+    "_Separator1_": 	"--------------------------------",
+	"_MainSettings_": 	"-------Oficyna Edukacyjna-------",
+	"_Oficyna2_":       "------ ebook.pazdro.com.pl -----",
+	"_Separator2_": 	"--------------------------------",
+	
+	"oficynaEmail": "EMAIL_GOES_HERE",
+	"oficynaPassword": "PASSWORD_GOES_HERE",
+
+	"_Separator3_": 	"---------------------------",
+	"_WSIP1_": 			"----------- WSIP ----------",
+	"_WSIP2_": 			"-------- wsipnet.pl -------",
+	"_Separator4_": 	"---------------------------",
+	
+	"wsipEmail": "EMAIL_GOES_HERE",
+	"wsipPassword": "PASSWORD_GOES_HERE",
+
+	"_Separator98_": 	"---------------------------",
+	"_Wafel_": 			"-------Wafelowski.dev------",
+	"_Separator99_": 	"---------------------------"
+}

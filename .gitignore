@@ -4,6 +4,7 @@
 */dist/*
 /.venv/
 /.vs/
+*/*config.json
 
 #################
 # FileNameTools #
@@ -27,12 +28,12 @@
 /VPNChecker/ip_addresses.txt
 
 ##################
-# WsipDownloader #
+# EbookDownloaders #
 ##################
 
-/WsipDownloader/chrome-data
-/WsipDownloader/Fizyka.pdf
-/WsipDownloader/images
+/EbookDownloaders/chrome-data
+/EbookDownloaders/*.pdf
+/EbookDownloaders/strony/*
 
 ###################
 # BinaryConverter #
