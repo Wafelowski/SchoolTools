@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 pause = input("Podaj tryb programu. \n1 - Pobieranie plikow \n2 - Pakowanie w PDF. \n\nWybór: ")
 
@@ -56,7 +57,7 @@ if str(pause) == "1":
     # 4. Kliknij na nią prawym
     # 5. Copy -> Full XPATH
 
-    button = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div[2]/a")
+    button = driver.find_element(By.XPATH, "/html/body/div/div/div[2]/div[2]/div/div[2]/div[2]/div[3]/a")
     button.click()
 
     time.sleep(2)
@@ -68,13 +69,13 @@ if str(pause) == "1":
 
     pause = input("Kliknij Enter by rozpoczac pobieranie plikow, jak książka się załaduje...")
 
-    for x in range(1, 259):
+    for x in range(1, 568):
         
-        current_page2 = driver.find_element(By.XPATH, '//*[@id="__next"]/div/div[2]/div[2]/div[1]/div[2]/input')
-        current_page = int(current_page2.get_attribute("value"))
-        time.sleep(3)
+        current_page_box = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/input')
+        current_page = int(current_page_box.get_attribute("value"))
+        time.sleep(2)
 
-        both = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/div')
+        both = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/div[1]/div/div/div/div[1]')
 
         location = both.location
         size = both.size
@@ -83,25 +84,28 @@ if str(pause) == "1":
         # credits to https://stackoverflow.com/a/15870708 
 
         left = location['x']
-        left = int(left)+280
+        left = int(left)-200 #+280
         top = location['y']
-        right = location['x'] + int(size['width'])-300
-        bottom = location['y'] + size['height']
+        right = location['x'] + int(size['width'])-298
+        bottom = location['y'] + int(size['height'])-249
 
 
         im = im.crop((left, top, right, bottom)) # defines crop points
-        if current_page == 1:
-            im.save(f'strony/oficyna/Strona {int(current_page)}.png')
-            print(f'Zapisano obrazek ze strony {current_page}, url {driver.current_url} \n')
-            next_button = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/button')
-        else:
-            im.save(f'strony/oficyna/Strony {int(current_page)-1} - {int(current_page)}.png')
-            print(f'Zapisano obrazek ze strony {int(current_page)-1} - {current_page}, url {driver.current_url} \n')
-            next_button = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/button[2]')
+        # if current_page == 1:
+        im.save(f'strony/oficyna/Strona {int(current_page)}.png')
+        print(f'Zapisano obrazek ze strony {current_page}, url {driver.current_url} \n')
+        #    next_button = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/button')
+        # else:
+        #     im.save(f'strony/oficyna/Strony {int(current_page)-1} - {int(current_page)}.png')
+        #     print(f'Zapisano obrazek ze strony {int(current_page)-1} - {current_page}, url {driver.current_url} \n')
+        #     next_button = driver.find_element(By.XPATH, '/html/body/div/div/div[1]/button[2]')
         
-        if current_page != 515:
-            next_button.click()
-        time.sleep(2)
+        # if current_page != 515:
+        #     next_button.click()
+        time.sleep(1)
+        current_page_box.clear()
+        current_page_box.send_keys(current_page+1)
+        current_page_box.send_keys(Keys.ENTER)
         
     pause = input("Kliknij Enter by zakonczyc program...")
 
@@ -109,7 +113,10 @@ if str(pause) == "1":
 
 if str(pause) == "2":
     imgList = os.listdir('./strony/oficyna/')
-    print(imgList)
+
+    for index, img in enumerate(imgList):
+        if "Strona" not in imgList[index]:
+            imgList.pop(index)
     
     imgList.sort(key=lambda f: int(re.sub('\D', '', f)))
     for index, img in enumerate(imgList):
