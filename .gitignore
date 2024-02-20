@@ -27,13 +27,18 @@
 ##############
 /VPNChecker/ip_addresses.txt
 
-##################
+####################
 # EbookDownloaders #
-##################
-
+####################
 /EbookDownloaders/chrome-data
 /EbookDownloaders/*.pdf
 /EbookDownloaders/strony/*
+
+##############
+# ExcelToHTML #
+##############
+/ExcelToHTML/*.xlsx
+/ExcelToHTML/*.txt
 
 ###################
 # BinaryConverter #
