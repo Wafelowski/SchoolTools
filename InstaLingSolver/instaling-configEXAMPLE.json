@@ -1,0 +1,17 @@
+{
+    "_Separator1_": 	"--------------------------------",
+	"_MainSettings_":   "------ Główne ustawienia -------",
+	"_Separator2_": 	"--------------------------------",
+
+	"manual": false,
+	"login": "LOGIN",
+	"password": "PASSWORD",
+
+    "browser": "edge / chrome / safari",
+	
+	"webhook_url": "Discord Webhook URL | Set to 'None' to disable",
+
+	"_Separator98_": 	"--------------------------",
+	"_Wafel_": 			"-------Wafelowski.pl------",
+	"_Separator99_": 	"--------------------------"
+}
