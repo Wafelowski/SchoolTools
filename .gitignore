@@ -11,6 +11,11 @@
 #################
 /FileNameTools/results
 
+###################
+# InstaLingSolver #
+###################
+/InstaLingSolver/translations.json
+
 ##############
 # ResChanger #
 ##############
