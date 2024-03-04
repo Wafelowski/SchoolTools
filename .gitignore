@@ -6,6 +6,13 @@
 /.vs/
 */*config.json
 
+##################
+# CompressToSize #
+##################
+/compressed
+*.jpg
+*.jpeg
+
 #################
 # FileNameTools #
 #################
