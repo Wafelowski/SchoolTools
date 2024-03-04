@@ -61,4 +61,11 @@ def compress_jpeg(input_file, target_size, output_file):
 # Replace with your actual folder path
 folder_path = script_dir
 
-compress_jpeg_folder(folder_path)
+size = input("Enter the target size in kB: ")
+
+if size.isdigit():
+  size = int(size)
+else:
+  size = 500
+  
+compress_jpeg_folder(folder_path, size * 1024)
