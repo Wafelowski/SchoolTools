@@ -309,9 +309,14 @@ def run_app(max_good_ans = [7, 11]):
         word = word.get_attribute("innerHTML")
         translated = solveWord(translator, word)
 
+        if good_ans >= max_good_ans:
+            if good_ans == max_good_ans:
+                print(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
+                sendWebhook(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
+            translated = ""
+
         attempts = 0
         while not textbox.is_displayed():
-
             summary = getElement(driver, "id", "summary")
             if summary.is_displayed() and ("Gratulacje" in summary.get_attribute("innerHTML")):
                 printSummary(driver)
@@ -328,14 +333,12 @@ def run_app(max_good_ans = [7, 11]):
                 nextWord.click()
                 time.sleep(2)
                 textbox = getElement(driver, "id", "answer")
-                if not textbox.is_displayed():
-                    sendWebhook(f"Textbox się nie wyświetlił po kliknięciu przycisku do następnego słówka. \n[Textbox displayed: `{textbox.is_displayed()}`] \n[Nextword displayed: `{nextWord.is_displayed()}`]")
+                # if not textbox.is_displayed():
+                #     sendWebhook(f"Textbox się nie wyświetlił po kliknięciu przycisku do następnego słówka. \n[Textbox displayed: `{textbox.is_displayed()}`] \n[Nextword displayed: `{nextWord.is_displayed()}`]")
 
                 word = getElement(driver, "class", "translations")
                 word = word.get_attribute("innerHTML")
-
                 checkAnswer = getElement(driver, "id", "check")
-
                 translated = solveWord(translator, word)
             print("")
             attempts += 1
@@ -352,7 +355,6 @@ def run_app(max_good_ans = [7, 11]):
         if ", " in word:
             fullWord = word
             word = word.split(", ")[0]
-
         if ", " in translated:
             translated = translated.split(", ")[0]
 
