@@ -158,7 +158,7 @@ def stop_app():
     input("Kliknij Enter aby zakończyć...")
     exit()
 
-def run_app():
+def run_app(max_good_ans = [7, 11]):
     if browser == "chrome":
         serv = Service(ChromeDriverManager().install())
         chrome_options = Options()
@@ -405,7 +405,6 @@ def run_app():
         pause = input("Kliknij Enter by zakonczyc program...")
     driver.quit()
 
-
-run_app()
+run_app(max_good_ans)
 input("Kliknij Enter aby zakończyć...")
 exit()
