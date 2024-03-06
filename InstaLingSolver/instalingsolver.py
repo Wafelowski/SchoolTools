@@ -1,3 +1,4 @@
+import random
 import re
 import time
 import json
@@ -19,6 +20,7 @@ with open("instaling-config.json", "r") as config:
     manual = data["manual"]
     browser = data["browser"]
     webhookUrl = data["webhook_url"]
+    max_good_ans = data["max_good_answers"]
 
 # create a file to store translations
 try:
@@ -271,6 +273,11 @@ def run_app():
 
 
     attempts = 0
+    good_ans = 0
+
+    if (max_good_ans != "None") and (max_good_ans is not None):
+        max_good_ans = random.randint(max_good_ans[0], max_good_ans[1])
+        
     while "https://instaling.pl/ling2/html_app/app.php?child_id" in driver.current_url:
         if manual:
             input("Kliknij Enter by rozwiązać słówko...")
@@ -377,8 +384,9 @@ def run_app():
             answer = None
         elif "Dobrze" in result.get_attribute("innerHTML"):
             print(f"Dobra odpowiedź: {word} -> {answer}.")
+            good_ans += 1
+
         
-            
 
         saveTranslation(word, answer, fullWord)
 

@@ -8,6 +8,8 @@
 	"password": "PASSWORD",
 
     "browser": "edge / chrome / safari",
+	"max_good_answers": ["FROM", "TO | Number is randomly selected from this range | Set to 'None' to disable, not as array"],
+
 	
 	"webhook_url": "Discord Webhook URL | Set to 'None' to disable",
 
