@@ -309,11 +309,12 @@ def run_app(max_good_ans = [7, 11]):
         word = word.get_attribute("innerHTML")
         translated = solveWord(translator, word)
 
-        if good_ans >= max_good_ans:
+        if (good_ans >= max_good_ans) and (word not in failed_words):
             if good_ans == max_good_ans:
                 print(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
                 sendWebhook(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
             translated = ""
+            failed_words = word
 
         attempts = 0
         while not textbox.is_displayed():
