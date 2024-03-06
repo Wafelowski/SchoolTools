@@ -278,6 +278,7 @@ def run_app(max_good_ans = [7, 11]):
 
     attempts = 0
     good_ans = 0
+    failed_words = [] # Words were skipped due to the limit of good answers being reached, will be answered properly again
 
     if (max_good_ans != "None") and (max_good_ans is not None):
         max_good_ans = random.randint(max_good_ans[0], max_good_ans[1])
@@ -314,7 +315,7 @@ def run_app(max_good_ans = [7, 11]):
                 print(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
                 sendWebhook(f"Osiągnięto maksymalną ilość dobrych odpowiedzi: {good_ans}.")
             translated = ""
-            failed_words = word
+            failed_words.append(word)
 
         attempts = 0
         while not textbox.is_displayed():
