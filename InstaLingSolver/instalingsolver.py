@@ -3,6 +3,7 @@ import re
 import time
 import json
 import requests
+import os
 from alive_progress import alive_bar
 from deep_translator import GoogleTranslator
 
@@ -12,8 +13,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
+script_dir = os.path.dirname(__file__)
+config_path = os.path.join(script_dir, 'instaling-config.json')
+
 # SECTION Config
-with open("instaling-config.json", "r") as config: 
+with open(f"{config_path}", "r") as config: 
     data = json.load(config)
     login = data["login"]
     password = data["password"]
