@@ -387,9 +387,11 @@ def run_app(max_good_ans = [7, 11]):
             if answer == translated:
                 sendWebhook(f"Odpowiedzi są identyczne, ale jednak złe. `{word}` -> `{answer}` zamiast `{translated}`.", True)
             print(f"Zła odpowiedź: {word} -> {answer} zamiast {translated}.")
+            failed_words.append(word)
         elif "Literówka" in result.get_attribute("innerHTML"):
             print(f"Literówka: {word} -> {translated}.")
             answer = None
+            failed_words.append(word)
         elif "Dobrze" in result.get_attribute("innerHTML"):
             print(f"Dobra odpowiedź: {word} -> {answer}.")
             good_ans += 1
@@ -412,3 +414,5 @@ def run_app(max_good_ans = [7, 11]):
 run_app(max_good_ans)
 input("Kliknij Enter aby zakończyć...")
 exit()
+
+# TODO: Progress bar for properly answered words, and failed words. Terminal being cleared and progress bars being updated each word
