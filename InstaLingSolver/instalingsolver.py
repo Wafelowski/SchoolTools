@@ -36,16 +36,26 @@ except:
 
 # SECTION Functions
 def sendWebhook(message, error = False):
+    """
+    Sends a webhook with the specified message.
+
+    Args:
+        message (str): The message to be sent in the webhook.
+        error (bool, optional): Indicates whether the message is an error message. Defaults to False.
+
+    Returns:
+        None
+    """
     url = webhookUrl
 
     if error:
         message = f"**ERROR:** <@273904398261026817>: ```\n{message}\n```"
     data = {
-        "content" : message,
-        "username" : "InstaLingSolver",
+        "content": message,
+        "username": "InstaLingSolver",
     }
 
-    result = requests.post(url, json = data)
+    result = requests.post(url, json=data)
 
     try:
         result.raise_for_status()
@@ -159,6 +169,15 @@ def stop_app():
     exit()
 
 def run_app(max_good_ans = [7, 11]):
+    """
+    Runs the InstaLingSolver application.
+
+    Args:
+        max_good_ans (list, optional): A list containing the minimum and maximum number of good answers to achieve before stopping. Defaults to [7, 11].
+
+    Returns:
+        bool: True if the application runs successfully, False otherwise.
+    """
     if browser == "chrome":
         serv = Service(ChromeDriverManager().install())
         chrome_options = Options()
