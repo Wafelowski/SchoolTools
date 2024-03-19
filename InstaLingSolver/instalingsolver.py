@@ -346,6 +346,26 @@ def run_app(max_good_ans = [7, 11]):
             attempts += 1
             if textbox.is_displayed():
                 break
+            else: # Sometimes there's a "I know this word" / "I don't know this word" button
+                know_section = getElement(driver, "id", "new_word_form")
+                if know_section.is_displayed():
+                    know_button = getElement(driver, "id", "know_new")
+                    dont_know_button = getElement(driver, "id", "dont_know_new")
+                    if know_button.is_displayed() and dont_know_button.is_displayed():
+                        dont_know_button.click()
+                        know_section = getElement(driver, "id", "possible_word_page")
+                        skip_button = getElement(driver, "id", "skip")
+                        if know_section.is_displayed() and skip_button.is_displayed():
+                            skip_button.click()
+                            time.sleep(2)
+                            del know_section, know_button, dont_know_button, skip_button
+                            # textbox = getElement(driver, "id", "answer")
+                            # word = getElement(driver, "class", "translations")
+                            # word = word.get_attribute("innerHTML")
+                            # checkAnswer = getElement(driver, "id", "check")
+                            # translated = solveWord(translator, word)
+                            # break
+                            
 
         if (word is None) or (word == "None") or (translated == None):
             print(f"Nie udało się przetłumaczyć słówka: {word}.")
@@ -383,6 +403,8 @@ def run_app(max_good_ans = [7, 11]):
             stop_app()
             
 
+        # TODO: If word was failed the first time, but then answered properly. Do not count it as good answer
+
         if "Niepoprawnie" in result.get_attribute("innerHTML"):
             if answer == translated:
                 sendWebhook(f"Odpowiedzi są identyczne, ale jednak złe. `{word}` -> `{answer}` zamiast `{translated}`.", True)
@@ -394,7 +416,8 @@ def run_app(max_good_ans = [7, 11]):
             failed_words.append(word)
         elif "Dobrze" in result.get_attribute("innerHTML"):
             print(f"Dobra odpowiedź: {word} -> {answer}.")
-            good_ans += 1
+            if word not in failed_words:
+                good_ans += 1
 
         
 
