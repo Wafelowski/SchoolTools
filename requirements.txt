@@ -21,7 +21,7 @@ GitPython==3.1.41
 h11==0.13.0
 idna==3.3
 img2pdf==0.4.3
-Jinja2==2.11.3
+Jinja2==3.1.6
 jinja2-time==0.2.0
 lxml==4.7.1
 MarkupSafe==2.0.1
