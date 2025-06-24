@@ -6,10 +6,10 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 
 def compress_jpeg_folder(folder_path, target_size=500 * 1024):
   """
-  Compresses all JPEG images in a folder to approximately the target size while maintaining quality.
-
+  Compresses all JPEG and PNG images in a folder to approximately the target size while maintaining quality.
+  PNGs are converted to JPEG.
   Args:
-    folder_path: Path to the folder containing JPEG images.
+    folder_path: Path to the folder containing images.
     target_size: Target file size in bytes (default: 500kB).
   """
   # Create compressed folder if it doesn't exist
@@ -18,44 +18,56 @@ def compress_jpeg_folder(folder_path, target_size=500 * 1024):
     os.makedirs(compressed_folder)
 
   for filename in os.listdir(folder_path):
-    if filename.endswith(".jpg") or filename.endswith(".jpeg"):
+    if filename.lower().endswith((".jpg", ".jpeg", ".png")):
       input_file = os.path.join(folder_path, filename)
-      output_file = os.path.join(compressed_folder, filename)
+      # For PNGs, change extension to .jpg in output
+      if filename.lower().endswith(".png"):
+        output_filename = os.path.splitext(filename)[0] + ".jpg"
+      else:
+        output_filename = filename
+      output_file = os.path.join(compressed_folder, output_filename)
       compress_jpeg(input_file, target_size, output_file)
 
 def compress_jpeg(input_file, target_size, output_file):
   """
-  Compresses a single JPEG image to approximately the target size while maintaining quality.
-
+  Compresses a single JPEG or PNG image to approximately the target size while maintaining quality.
+  PNGs are converted to JPEG.
   Args:
-    input_file: Path to the input JPEG file.
+    input_file: Path to the input image file.
     target_size: Target file size in bytes.
     output_file: Path to the output compressed JPEG file.
   """
   quality = 99
-  
-  # Open and compress image with current quality
+
+  # Open image
   img = Image.open(input_file)
-  compressed_size = os.path.getsize(input_file)
-  
-  while True:
-    if compressed_size > target_size:
-      img.save(output_file, "JPEG", quality=quality)
-      compressed_size = os.path.getsize(output_file)
-      quality -= 1
-    else:
-      break
-  
+  # Convert PNG to RGB (JPEG doesn't support alpha)
+  if img.mode in ("RGBA", "P"):
+    img = img.convert("RGB")
+
+  # Save a temporary file to measure size
+  temp_file = output_file + ".tmp"
+  img.save(temp_file, "JPEG", quality=quality)
+  compressed_size = os.path.getsize(temp_file)
+
+  while compressed_size > target_size and quality > 10:
+    img.save(temp_file, "JPEG", quality=quality)
+    compressed_size = os.path.getsize(temp_file)
+    quality -= 1
+
   # Resize if size is still above target
   if compressed_size > target_size:
     print("Quality compression not enough, resizing...")
     width, height = img.size
-    new_width = int(width * (target_size / compressed_size))
-    new_height = int(height * (target_size / compressed_size))
+    scale = (target_size / compressed_size) ** 0.5
+    new_width = max(1, int(width * scale))
+    new_height = max(1, int(height * scale))
     img = img.resize((new_width, new_height), Image.ANTIALIAS)
-    img.save(output_file, "JPEG", quality=quality)
-  
-  print(f"Image '{input_file}' compressed to {compressed_size / 1024:.2f}kB with quality {quality}")
+    img.save(temp_file, "JPEG", quality=quality)
+
+  # Move temp file to output
+  os.replace(temp_file, output_file)
+  print(f"Image '{input_file}' compressed to {os.path.getsize(output_file) / 1024:.2f}kB with quality {quality}")
 
 # Example usage
 # Replace with your actual folder path
@@ -67,5 +79,5 @@ if size.isdigit():
   size = int(size)
 else:
   size = 500
-  
+
 compress_jpeg_folder(folder_path, size * 1024)
